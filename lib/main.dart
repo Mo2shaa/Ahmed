@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'auth/firebase_user_provider.dart';
-import 'package:flut/login/login_widget.dart';
+import 'package:flut/start/start_widget.dart';
 import 'package:flut/homescreen/homescreen_widget.dart';
 
 void main() async {
@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
             )
           : currentUser.loggedIn
               ? HomescreenWidget()
-              : LoginWidget(),
+              : StartWidget(),
     );
   }
 }

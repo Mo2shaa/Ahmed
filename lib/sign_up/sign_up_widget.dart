@@ -5,7 +5,6 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../homescreen/homescreen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
 
 class SignUpWidget extends StatefulWidget {
   SignUpWidget({Key key}) : super(key: key);
@@ -15,21 +14,21 @@ class SignUpWidget extends StatefulWidget {
 }
 
 class _SignUpWidgetState extends State<SignUpWidget> {
+  TextEditingController confirmPasswordTextController;
+  bool passwordVisibility2;
   TextEditingController emailTextController;
   TextEditingController passwordTextController;
   bool passwordVisibility1;
-  TextEditingController textController;
-  bool passwordVisibility2;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    confirmPasswordTextController = TextEditingController();
+    passwordVisibility2 = false;
     emailTextController = TextEditingController();
     passwordTextController = TextEditingController();
     passwordVisibility1 = false;
-    textController = TextEditingController();
-    passwordVisibility2 = false;
   }
 
   @override
@@ -216,7 +215,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                       padding:
                                           EdgeInsets.fromLTRB(20, 0, 20, 0),
                                       child: TextFormField(
-                                        controller: textController,
+                                        controller:
+                                            confirmPasswordTextController,
                                         obscureText: !passwordVisibility2,
                                         decoration: InputDecoration(
                                           hintText: ' Confirm Password',
@@ -284,7 +284,22 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                       padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          final user = await signInWithEmail(
+                                          if (passwordTextController.text !=
+                                              confirmPasswordTextController
+                                                  .text) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  "Passwords don't match!",
+                                                ),
+                                              ),
+                                            );
+                                            return;
+                                          }
+
+                                          final user =
+                                              await createAccountWithEmail(
                                             context,
                                             emailTextController.text,
                                             passwordTextController.text,
@@ -293,20 +308,16 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                             return;
                                           }
 
-                                          await Navigator.push(
+                                          await Navigator.pushAndRemoveUntil(
                                             context,
-                                            PageTransition(
-                                              type: PageTransitionType
-                                                  .rightToLeft,
-                                              duration:
-                                                  Duration(milliseconds: 300),
-                                              reverseDuration:
-                                                  Duration(milliseconds: 300),
-                                              child: HomescreenWidget(),
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomescreenWidget(),
                                             ),
+                                            (r) => false,
                                           );
                                         },
-                                        text: 'Sign in',
+                                        text: 'Sign up',
                                         options: FFButtonOptions(
                                           width: 300,
                                           height: 50,

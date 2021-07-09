@@ -1,8 +1,7 @@
-import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../login/login_widget.dart';
+import '../sign_up/sign_up_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
@@ -110,10 +109,6 @@ class _StartWidgetState extends State<StartWidget> {
                               alignment: Alignment(0.05, 0.85),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  final user = await signInWithGoogle(context);
-                                  if (user == null) {
-                                    return;
-                                  }
                                   await Navigator.push(
                                     context,
                                     PageTransition(
@@ -121,7 +116,7 @@ class _StartWidgetState extends State<StartWidget> {
                                       duration: Duration(milliseconds: 300),
                                       reverseDuration:
                                           Duration(milliseconds: 300),
-                                      child: LoginWidget(),
+                                      child: SignUpWidget(),
                                     ),
                                   );
                                 },

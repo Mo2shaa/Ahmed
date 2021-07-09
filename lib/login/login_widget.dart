@@ -205,15 +205,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       return;
                                     }
 
-                                    await Navigator.push(
+                                    await Navigator.pushAndRemoveUntil(
                                       context,
-                                      PageTransition(
-                                        type: PageTransitionType.rightToLeft,
-                                        duration: Duration(milliseconds: 300),
-                                        reverseDuration:
-                                            Duration(milliseconds: 300),
-                                        child: HomescreenWidget(),
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            HomescreenWidget(),
                                       ),
+                                      (r) => false,
                                     );
                                   },
                                   text: 'Sign in',
@@ -391,15 +389,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   ),
                                   InkWell(
                                     onTap: () async {
-                                      final user = await createAccountWithEmail(
-                                        context,
-                                        emailTextController.text,
-                                        passwordTextController.text,
-                                      );
-                                      if (user == null) {
-                                        return;
-                                      }
-
                                       await Navigator.push(
                                         context,
                                         PageTransition(
