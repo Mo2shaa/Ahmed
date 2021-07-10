@@ -1,4 +1,4 @@
-# flut
+# res_medical
 
 A new Flutter project.
 

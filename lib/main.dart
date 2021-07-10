@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'auth/firebase_user_provider.dart';
-import 'package:flut/start/start_widget.dart';
-import 'package:flut/homescreen/homescreen_widget.dart';
+import 'package:res_medical/start/start_widget.dart';
+import 'package:res_medical/homescreen/homescreen_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,20 +17,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Stream<FlutFirebaseUser> userStream;
-  FlutFirebaseUser initialUser;
+  Stream<ResMedicalFirebaseUser> userStream;
+  ResMedicalFirebaseUser initialUser;
 
   @override
   void initState() {
     super.initState();
-    userStream = flutFirebaseUserStream()
+    userStream = resMedicalFirebaseUserStream()
       ..listen((user) => initialUser ?? setState(() => initialUser = user));
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flut',
+      title: 'ResMedical',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: initialUser == null
           ? const Center(

@@ -65,6 +65,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 Expanded(
                   flex: 3,
                   child: Container(
+                    width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.tertiaryColor,
                       borderRadius: BorderRadius.circular(30),
