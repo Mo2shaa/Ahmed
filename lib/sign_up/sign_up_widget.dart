@@ -71,7 +71,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 60, 0, 60),
+                      padding: EdgeInsets.fromLTRB(0, 50, 0, 60),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -475,14 +475,11 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                           ),
                           Align(
                             alignment: Alignment(0, -0.65),
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
-                              child: Image.asset(
-                                'assets/images/png-clipart-medicine-staff-of-hermes-health-symbol-logo-health-text-medical-care-removebg-preview.png',
-                                width: 80,
-                                height: 80,
-                                fit: BoxFit.cover,
-                              ),
+                            child: Image.asset(
+                              'assets/images/png-clipart-medicine-staff-of-hermes-health-symbol-logo-health-text-medical-care-removebg-preview.png',
+                              width: 80,
+                              height: 80,
+                              fit: BoxFit.cover,
                             ),
                           )
                         ],

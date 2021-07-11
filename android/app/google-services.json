@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "319823595001",
-    "project_id": "resmedical-b2a97",
-    "storage_bucket": "resmedical-b2a97.appspot.com"
+    "project_number": "186136723530",
+    "project_id": "resmedicall",
+    "storage_bucket": "resmedicall.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:319823595001:android:16811fb184131cda01a928",
+        "mobilesdk_app_id": "1:186136723530:android:ca3263a6873ca4887aa6b3",
         "android_client_info": {
-          "package_name": "com.flutterflow.flut"
+          "package_name": "com.flutterflow.resmedical"
         }
       },
       "oauth_client": [
         {
-          "client_id": "319823595001-2bi1b3ubo97v60h6qq0v1fue0jt0v7fl.apps.googleusercontent.com",
+          "client_id": "186136723530-n6v7firgoqvhilgabffin6gmh35pfi2g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAOt_5UXTgzSgGcyuwsf6_Bh7eXntPT_9o"
+          "current_key": "AIzaSyA5FEsYe-DglBaOMpl8Fu7hk4uGv2I0AgU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "319823595001-2bi1b3ubo97v60h6qq0v1fue0jt0v7fl.apps.googleusercontent.com",
+              "client_id": "186136723530-n6v7firgoqvhilgabffin6gmh35pfi2g.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "319823595001-90jupg534lckidifkgkna9jp5dfdbj4u.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.flutterflow.flut"
-              }
             }
           ]
         }
