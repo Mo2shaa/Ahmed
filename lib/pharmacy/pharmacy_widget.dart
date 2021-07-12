@@ -110,7 +110,7 @@ class _PharmacyWidgetState extends State<PharmacyWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'elezby pharmacy',
+                        'elezaby pharmacy',
                         style: FlutterFlowTheme.bodyText1.override(
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w600,
