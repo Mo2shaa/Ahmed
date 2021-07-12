@@ -16,17 +16,19 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  TextEditingController emailTextController;
-  TextEditingController passwordTextController;
+  TextEditingController textController1;
+  TextEditingController textController2;
   bool passwordVisibility;
+  TextEditingController textController3;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    emailTextController = TextEditingController();
-    passwordTextController = TextEditingController();
+    textController1 = TextEditingController();
+    textController2 = TextEditingController();
     passwordVisibility = false;
+    textController3 = TextEditingController();
   }
 
   @override
@@ -90,7 +92,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   child: Padding(
                                     padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                                     child: TextFormField(
-                                      controller: emailTextController,
+                                      controller: textController1,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         hintText: 'Email',
@@ -141,7 +143,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   child: Padding(
                                     padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                                     child: TextFormField(
-                                      controller: passwordTextController,
+                                      controller: textController2,
                                       obscureText: !passwordVisibility,
                                       decoration: InputDecoration(
                                         hintText: 'Password',
@@ -193,59 +195,83 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    final user = await signInWithEmail(
-                                      context,
-                                      emailTextController.text,
-                                      passwordTextController.text,
-                                    );
-                                    if (user == null) {
-                                      return;
-                                    }
-
-                                    await Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            HomescreenWidget(),
-                                      ),
-                                      (r) => false,
-                                    );
-                                  },
-                                  text: 'Sign in',
-                                  options: FFButtonOptions(
-                                    width: 300,
-                                    height: 50,
-                                    color: Color(0xFF0F2A58),
-                                    textStyle: GoogleFonts.getFont(
-                                      'Open Sans',
-                                      color: Color(0xFFDEDEDE),
-                                      fontSize: 16,
-                                    ),
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 0,
-                                    ),
-                                    borderRadius: 25,
+                                padding: EdgeInsets.fromLTRB(4, 0, 4, 20),
+                                child: Container(
+                                  width: 300,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFE0E0E0),
+                                    borderRadius: BorderRadius.circular(25),
                                   ),
-                                ),
-                              ),
-                              Text(
-                                'Forgot password?',
-                                style: GoogleFonts.getFont(
-                                  'Open Sans',
-                                  fontSize: 14,
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                    child: TextFormField(
+                                      controller: textController3,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        hintText: 'phone number',
+                                        hintStyle: GoogleFonts.getFont(
+                                          'Open Sans',
+                                          color: Color(0xFF455A64),
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                      ),
+                                      style: GoogleFonts.getFont(
+                                        'Open Sans',
+                                        color: Color(0xFF455A64),
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               )
                             ],
+                          ),
+                          FFButtonWidget(
+                            onPressed: () {
+                              print('Button pressed ...');
+                            },
+                            text: 'Log in',
+                            options: FFButtonOptions(
+                              width: 200,
+                              height: 40,
+                              color: Color(0xFF00296C),
+                              textStyle: FlutterFlowTheme.subtitle2.override(
+                                fontFamily: 'Poppins',
+                                color: Colors.white,
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: 12,
+                            ),
                           ),
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                                padding: EdgeInsets.fromLTRB(0, 20, 0, 2),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,

@@ -3,9 +3,11 @@ import '../elekbalhospita/elekbalhospita_widget.dart';
 import '../elmalkyhospital/elmalkyhospital_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import '../germanyhospital/germanyhospital_widget.dart';
 import '../luranhospital/luranhospital_widget.dart';
 import '../more/more_widget.dart';
+import '../neasresthospital/neasresthospital_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -618,6 +620,44 @@ class _HospitalWidgetState extends State<HospitalWidget> {
                           ),
                         ),
                       ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FFButtonWidget(
+                    onPressed: () async {
+                      await Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          duration: Duration(milliseconds: 300),
+                          reverseDuration: Duration(milliseconds: 300),
+                          child: NeasresthospitalWidget(),
+                        ),
+                      );
+                    },
+                    text: 'Nearest Hospital',
+                    options: FFButtonOptions(
+                      width: 200,
+                      height: 40,
+                      color: Color(0xFFFF0003),
+                      textStyle: FlutterFlowTheme.subtitle2.override(
+                        fontFamily: 'Poppins',
+                        color: FlutterFlowTheme.tertiaryColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: 12,
                     ),
                   )
                 ],
