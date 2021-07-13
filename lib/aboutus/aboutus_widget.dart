@@ -110,61 +110,30 @@ class _AboutusWidgetState extends State<AboutusWidget> {
                       )
                     ],
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment(-0.4, 0.2),
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                            child: Text(
-                              '  Resmedical, platform of healthcare solves \\nthe problem that face patients when they try to \\nreach doctorsuch as asking people about as\\ngood doctor and calling the clinic many times\\nto get an appointment',
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment(-0.4, 0.2),
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              child: Text(
+                                '  Resmedical, platform of healthcare solves \\nthe problem that face patients when they try to \\nreach doctorsuch as asking people about as\\ngood doctor and calling the clinic many times\\nto get an appointment',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.bodyText1.override(
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
-                        child: Text(
-                          '  Resmedical, platform of healthcare solves \\nthe problem that face patients when they try to \\nreach doctorsuch as asking people about as\\ngood doctor and calling the clinic many times\\nto get an appointment',
-                          textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
-                        child: Text(
-                          ' ResMedical is a free and user-friendly search engine\\nwhere one can look for various hospitals and \\nenable patient to find the most suitable hospital\\nfor them.',
-                          textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),

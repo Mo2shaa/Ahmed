@@ -45,7 +45,7 @@ class _HospitalWidgetState extends State<HospitalWidget> {
               Navigator.pop(context);
             },
             icon: Icon(
-              Icons.arrow_back_outlined,
+              Icons.arrow_back_ios_rounded,
               color: Colors.black,
               size: 30,
             ),
