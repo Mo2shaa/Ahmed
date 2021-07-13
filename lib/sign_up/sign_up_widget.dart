@@ -5,7 +5,6 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../homescreen/homescreen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
 
 class SignUpWidget extends StatefulWidget {
   SignUpWidget({Key key}) : super(key: key);
@@ -15,23 +14,21 @@ class SignUpWidget extends StatefulWidget {
 }
 
 class _SignUpWidgetState extends State<SignUpWidget> {
-  TextEditingController textController1;
-  TextEditingController textController2;
-  bool passwordVisibility1;
-  TextEditingController textController3;
+  TextEditingController confirmPasswordTextController;
   bool passwordVisibility2;
-  TextEditingController textController4;
+  TextEditingController emailTextController;
+  TextEditingController passwordTextController;
+  bool passwordVisibility1;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
-    passwordVisibility1 = false;
-    textController3 = TextEditingController();
+    confirmPasswordTextController = TextEditingController();
     passwordVisibility2 = false;
-    textController4 = TextEditingController();
+    emailTextController = TextEditingController();
+    passwordTextController = TextEditingController();
+    passwordVisibility1 = false;
   }
 
   @override
@@ -96,7 +93,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                       padding:
                                           EdgeInsets.fromLTRB(20, 0, 20, 0),
                                       child: TextFormField(
-                                        controller: textController1,
+                                        controller: emailTextController,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           hintText: 'Email',
@@ -150,7 +147,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                       padding:
                                           EdgeInsets.fromLTRB(20, 0, 20, 0),
                                       child: TextFormField(
-                                        controller: textController2,
+                                        controller: passwordTextController,
                                         obscureText: !passwordVisibility1,
                                         decoration: InputDecoration(
                                           hintText: 'Password',
@@ -219,7 +216,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                       padding:
                                           EdgeInsets.fromLTRB(20, 0, 20, 0),
                                       child: TextFormField(
-                                        controller: textController3,
+                                        controller:
+                                            confirmPasswordTextController,
                                         obscureText: !passwordVisibility2,
                                         decoration: InputDecoration(
                                           hintText: ' Confirm Password',
@@ -279,72 +277,38 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
-                                  child: Container(
-                                    width: 300,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFE0E0E0),
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.fromLTRB(20, 0, 20, 0),
-                                      child: TextFormField(
-                                        controller: textController4,
-                                        obscureText: false,
-                                        decoration: InputDecoration(
-                                          hintText: 'phone number',
-                                          hintStyle: GoogleFonts.getFont(
-                                            'Open Sans',
-                                            color: Color(0x7E000000),
-                                            fontWeight: FontWeight.w100,
-                                          ),
-                                          enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0x00000000),
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
-                                          ),
-                                          focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0x00000000),
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
-                                          ),
-                                        ),
-                                        style: GoogleFonts.getFont(
-                                          'Open Sans',
-                                          color: Color(0x7E000000),
-                                          fontWeight: FontWeight.w100,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
                                   padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      await Navigator.push(
+                                      if (passwordTextController.text !=
+                                          confirmPasswordTextController.text) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              "Passwords don't match!",
+                                            ),
+                                          ),
+                                        );
+                                        return;
+                                      }
+
+                                      final user = await createAccountWithEmail(
                                         context,
-                                        PageTransition(
-                                          type: PageTransitionType.rightToLeft,
-                                          duration: Duration(milliseconds: 300),
-                                          reverseDuration:
-                                              Duration(milliseconds: 300),
-                                          child: HomescreenWidget(),
+                                        emailTextController.text,
+                                        passwordTextController.text,
+                                      );
+                                      if (user == null) {
+                                        return;
+                                      }
+
+                                      await Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              HomescreenWidget(),
                                         ),
+                                        (r) => false,
                                       );
                                     },
                                     text: 'sign up',
@@ -371,61 +335,13 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 100,
-                                    height: 38,
-                                    child: Stack(
-                                      children: [
-                                        Align(
-                                          alignment: Alignment(-0.7, -0.01),
-                                          child: Container(
-                                            width: 18,
-                                            height: 18,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: Image.network(
-                                              'https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512',
-                                            ),
-                                          ),
-                                        ),
-                                        FFButtonWidget(
-                                          onPressed: () {
-                                            print('Button pressed ...');
-                                          },
-                                          text: 'Sign up',
-                                          icon: Icon(
-                                            Icons.add,
-                                            color: Colors.transparent,
-                                            size: 20,
-                                          ),
-                                          options: FFButtonOptions(
-                                            width: 100,
-                                            height: 38,
-                                            color: Colors.transparent,
-                                            textStyle: GoogleFonts.getFont(
-                                              'Open Sans',
-                                              color: Color(0xFF616161),
-                                              fontSize: 14,
-                                            ),
-                                            borderSide: BorderSide(
-                                              color: Color(0xFFAAAAAA),
-                                              width: 0.5,
-                                            ),
-                                            borderRadius: 0,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                                    child: Container(
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(0, 0, 0, 40),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
                                       width: 100,
                                       height: 38,
                                       child: Stack(
@@ -440,59 +356,111 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                 shape: BoxShape.circle,
                                               ),
                                               child: Image.network(
-                                                'https://i0.wp.com/nanophorm.com/wp-content/uploads/2018/04/google-logo-icon-PNG-Transparent-Background.png?w=1000&ssl=1',
-                                                fit: BoxFit.contain,
+                                                'https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512',
                                               ),
                                             ),
                                           ),
-                                          Align(
-                                            alignment: Alignment(0, 0),
-                                            child: FFButtonWidget(
-                                              onPressed: () async {
-                                                final user =
-                                                    await signInWithGoogle(
-                                                        context);
-                                                if (user == null) {
-                                                  return;
-                                                }
-                                                await Navigator
-                                                    .pushAndRemoveUntil(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        HomescreenWidget(),
-                                                  ),
-                                                  (r) => false,
-                                                );
-                                              },
-                                              text: 'Sign up',
-                                              icon: Icon(
-                                                Icons.add,
-                                                color: Colors.transparent,
-                                                size: 20,
+                                          FFButtonWidget(
+                                            onPressed: () {
+                                              print('Button pressed ...');
+                                            },
+                                            text: 'Sign up',
+                                            icon: Icon(
+                                              Icons.add,
+                                              color: Colors.transparent,
+                                              size: 20,
+                                            ),
+                                            options: FFButtonOptions(
+                                              width: 100,
+                                              height: 38,
+                                              color: Colors.transparent,
+                                              textStyle: GoogleFonts.getFont(
+                                                'Open Sans',
+                                                color: Color(0xFF616161),
+                                                fontSize: 14,
                                               ),
-                                              options: FFButtonOptions(
-                                                width: 100,
-                                                height: 38,
-                                                color: Colors.transparent,
-                                                textStyle: GoogleFonts.getFont(
-                                                  'Open Sans',
-                                                  color: Color(0xFF616161),
-                                                  fontSize: 14,
-                                                ),
-                                                borderSide: BorderSide(
-                                                  color: Color(0xFFAAAAAA),
-                                                  width: 0.5,
-                                                ),
-                                                borderRadius: 0,
+                                              borderSide: BorderSide(
+                                                color: Color(0xFFAAAAAA),
+                                                width: 0.5,
                                               ),
+                                              borderRadius: 0,
                                             ),
                                           )
                                         ],
                                       ),
                                     ),
-                                  )
-                                ],
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                                      child: Container(
+                                        width: 100,
+                                        height: 38,
+                                        child: Stack(
+                                          children: [
+                                            Align(
+                                              alignment: Alignment(-0.7, -0.01),
+                                              child: Container(
+                                                width: 18,
+                                                height: 18,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Image.network(
+                                                  'https://i0.wp.com/nanophorm.com/wp-content/uploads/2018/04/google-logo-icon-PNG-Transparent-Background.png?w=1000&ssl=1',
+                                                  fit: BoxFit.contain,
+                                                ),
+                                              ),
+                                            ),
+                                            Align(
+                                              alignment: Alignment(0, 0),
+                                              child: FFButtonWidget(
+                                                onPressed: () async {
+                                                  final user =
+                                                      await signInWithGoogle(
+                                                          context);
+                                                  if (user == null) {
+                                                    return;
+                                                  }
+                                                  await Navigator
+                                                      .pushAndRemoveUntil(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          HomescreenWidget(),
+                                                    ),
+                                                    (r) => false,
+                                                  );
+                                                },
+                                                text: 'Sign up',
+                                                icon: Icon(
+                                                  Icons.add,
+                                                  color: Colors.transparent,
+                                                  size: 20,
+                                                ),
+                                                options: FFButtonOptions(
+                                                  width: 100,
+                                                  height: 38,
+                                                  color: Colors.transparent,
+                                                  textStyle:
+                                                      GoogleFonts.getFont(
+                                                    'Open Sans',
+                                                    color: Color(0xFF616161),
+                                                    fontSize: 14,
+                                                  ),
+                                                  borderSide: BorderSide(
+                                                    color: Color(0xFFAAAAAA),
+                                                    width: 0.5,
+                                                  ),
+                                                  borderRadius: 0,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               )
                             ],
                           ),

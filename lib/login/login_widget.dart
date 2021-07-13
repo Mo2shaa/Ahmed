@@ -16,19 +16,17 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  TextEditingController textController1;
-  TextEditingController textController2;
+  TextEditingController emailTextController;
+  TextEditingController passwordTextController;
   bool passwordVisibility;
-  TextEditingController textController3;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
+    emailTextController = TextEditingController();
+    passwordTextController = TextEditingController();
     passwordVisibility = false;
-    textController3 = TextEditingController();
   }
 
   @override
@@ -92,7 +90,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   child: Padding(
                                     padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                                     child: TextFormField(
-                                      controller: textController1,
+                                      controller: emailTextController,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         hintText: 'Email',
@@ -143,7 +141,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   child: Padding(
                                     padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                                     child: TextFormField(
-                                      controller: textController2,
+                                      controller: passwordTextController,
                                       obscureText: !passwordVisibility,
                                       decoration: InputDecoration(
                                         hintText: 'Password',
@@ -193,63 +191,27 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(4, 0, 4, 20),
-                                child: Container(
-                                  width: 300,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFE0E0E0),
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                                    child: TextFormField(
-                                      controller: textController3,
-                                      obscureText: false,
-                                      decoration: InputDecoration(
-                                        hintText: 'phone number',
-                                        hintStyle: GoogleFonts.getFont(
-                                          'Open Sans',
-                                          color: Color(0xFF455A64),
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                        enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 1,
-                                          ),
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(4.0),
-                                            topRight: Radius.circular(4.0),
-                                          ),
-                                        ),
-                                        focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 1,
-                                          ),
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(4.0),
-                                            topRight: Radius.circular(4.0),
-                                          ),
-                                        ),
-                                      ),
-                                      style: GoogleFonts.getFont(
-                                        'Open Sans',
-                                        color: Color(0xFF455A64),
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                  ),
-                                ),
                               )
                             ],
                           ),
                           FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
+                            onPressed: () async {
+                              final user = await signInWithEmail(
+                                context,
+                                emailTextController.text,
+                                passwordTextController.text,
+                              );
+                              if (user == null) {
+                                return;
+                              }
+
+                              await Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomescreenWidget(),
+                                ),
+                                (r) => false,
+                              );
                             },
                             text: 'Log in',
                             options: FFButtonOptions(
